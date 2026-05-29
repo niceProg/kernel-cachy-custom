@@ -1,0 +1,23 @@
+# ── Build artifacts & regenerable sources (jangan di-commit) ──
+# Extracted kernel source + hasil compile (9+ GB, regen otomatis saat build)
+linux-cachyos/src/
+# Staging makepkg
+linux-cachyos/pkg/
+# Source tarball CachyOS (>100MB, tinggal download ulang via makepkg)
+linux-cachyos/*.tar.gz
+# Paket binary hasil build
+linux-cachyos/*.pkg.tar.zst
+linux-cachyos/*.pkg.tar.*
+
+# Build log (regenerable)
+*.log
+
+# Scratch
+tmp/
+
+# Metadata clone AUR yang di-preserve (bukan bagian dari repo ini;
+# rename balik ke .git untuk pull update dari AUR)
+linux-cachyos/.git-aur-backup/
+
+# Catatan pribadi (jangan di-commit)
+RESUME.md
