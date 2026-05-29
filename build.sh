@@ -18,6 +18,7 @@ export _cc_harder=yes              # -O3
 export _per_gov=no                 # keep schedutil default (TLP/battery)
 export _localmodcfg=yes            # trim modules to this machine
 export _localmodcfg_path="$HOME/.config/modprobed.db"
+export _tcp_bbr3=yes               # Google BBR v3 as default TCP congestion control
 # Untouched cachyos defaults: _hugepage=always, _cachy_config=yes,
 # CONFIG_CPU_MITIGATIONS=y (mitigations stay ON).
 

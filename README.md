@@ -29,6 +29,7 @@ mengorbankan baterai maupun keamanan.
 | `_cc_harder` | `yes` | `-O3` |
 | `_per_gov` | `no` | biarkan `schedutil` default (TLP atur baterai) |
 | `_localmodcfg` | `yes` | trim modul ke mesin ini (`~/.config/modprobed.db`) |
+| `_tcp_bbr3` | `yes` | Google BBR v3 sebagai congestion control TCP default |
 | mitigations | **ON** | `CONFIG_CPU_MITIGATIONS=y` — keamanan tidak dikompromikan |
 
 ---
@@ -94,17 +95,15 @@ mesin kamu), lalu reboot dan pilih entry-nya. `uname -r` → `7.0.9-cachyos`.
 
 Beberapa penyetelan tambahan yang bisa dipertimbangkan, terpisah dari resep inti:
 
-- **BBR v3** — CachyOS sudah menyediakan toggle-nya; aktifkan lewat `build.sh`:
-  ```bash
-  export _tcp_bbr3=yes
-  ```
-- **Tuning jaringan via sysctl** (tanpa rebuild kernel) — mis. `/etc/sysctl.d/99-net.conf`:
+- **BBR v3** sudah **aktif** di resep ini (`_tcp_bbr3=yes`) — kernel memakai BBR
+  sebagai congestion control default. Untuk hasil terbaik, pasangkan dengan qdisc
+  `fq` via `/etc/sysctl.d/99-net.conf`:
   ```conf
   net.core.default_qdisc = fq
   net.ipv4.tcp_congestion_control = bbr
   ```
 
-Catatan: opsi di atas opsional dan tidak diaktifkan pada build default repo ini.
+Catatan: perubahan `build.sh` baru berlaku setelah **rebuild + reinstall + reboot**.
 
 ---
 
