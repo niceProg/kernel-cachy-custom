@@ -90,6 +90,24 @@ mesin kamu), lalu reboot dan pilih entry-nya. `uname -r` → `7.0.9-cachyos`.
 
 ---
 
+## Tuning opsional (tidak aktif secara default)
+
+Beberapa penyetelan tambahan yang bisa dipertimbangkan, terpisah dari resep inti:
+
+- **BBR v3** — CachyOS sudah menyediakan toggle-nya; aktifkan lewat `build.sh`:
+  ```bash
+  export _tcp_bbr3=yes
+  ```
+- **Tuning jaringan via sysctl** (tanpa rebuild kernel) — mis. `/etc/sysctl.d/99-net.conf`:
+  ```conf
+  net.core.default_qdisc = fq
+  net.ipv4.tcp_congestion_control = bbr
+  ```
+
+Catatan: opsi di atas opsional dan tidak diaktifkan pada build default repo ini.
+
+---
+
 ## Kredit
 - [CachyOS](https://github.com/CachyOS) — PKGBUILD & patchset `linux-cachyos`
 - [BORE scheduler](https://github.com/firelzrd/bore-scheduler) — Masahito Suzuki
